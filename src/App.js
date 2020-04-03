@@ -1,6 +1,8 @@
 import React from 'react';
+import { useEffect } from 'react';
 import ParameterSidebar from './components/ParameterSidebar';
-import { makeStyles, CssBaseline, Drawer, Divider, Typography, AppBar, Toolbar } from '@material-ui/core';
+import { makeStyles, CssBaseline, Typography, AppBar, Toolbar } from '@material-ui/core';
+import LineGraph from './components/LineGraph';
 
 const drawerWidth = 300;
 
@@ -21,7 +23,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+
   const classes = useStyles();
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -58,6 +62,7 @@ function App() {
           nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
           accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
         </Typography>
+        <LineGraph />
       </main>
     </div>
   );

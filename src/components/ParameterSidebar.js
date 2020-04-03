@@ -15,12 +15,14 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    padding: '0 10px',
   },
   toolbar: theme.mixins.toolbar,
 }));
 
-const ParameterSidebar = () => {
+const ParameterSidebar = (props) => {
   const classes = useStyles();
+
   return (
     <Drawer
       className={classes.drawer}
@@ -34,14 +36,15 @@ const ParameterSidebar = () => {
       <Divider />
         <Typography variant="subtitle1">
           Hospital Parameters
-          <a href="https://code-for-philly.gitbook.io/chime/what-is-chime/parameters#hospital-parameters" target="_blank">
+          <a href="https://code-for-philly.gitbook.io/chime/what-is-chime/parameters#hospital-parameters" target="_blank" rel="noopener noreferrer">
             <InfoIcon fontSize="small"/>
           </a>
           </Typography>
         <ParameterInput 
           id="regional-population" 
           label="Regional Population"
-          defaultValue="360000" 
+          defaultValue={360000}
+          modifyBy={1} 
         />
         <ParameterInput 
           id="hospital-market" 
@@ -56,7 +59,7 @@ const ParameterSidebar = () => {
       <Divider />
       <Typography variant="subtitle1">
         Spread and Contact Parameters
-        <a href="" target="_blank">
+        <a href="https://code-for-philly.gitbook.io/chime/what-is-chime/parameters#spread-and-contact-parameters" target="_blank" rel="noopener noreferrer">
           <InfoIcon fontSize="small" />
         </a>
       </Typography>
