@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button';
 import ParameterInput from './ParameterInput';
 import InfoIcon from '@material-ui/icons/Info';
+import { setRegionalPopulation, resetParams } from '../redux/actions';
 
 const drawerWidth = 300;
 
@@ -43,18 +46,18 @@ const ParameterSidebar = (props) => {
         <ParameterInput 
           id="regional-population" 
           label="Regional Population"
-          defaultValue={360000}
-          modifyBy={1} 
+          defaultValue={props.regionalPopulation}
+          onInputChange={ e => props.setRegionalPopulation(e.target.value)} 
         />
         <ParameterInput 
           id="hospital-market" 
           label="Hospital Market Share (%)"
-          defaultValue="15" 
+          defaultValue={props.hospitalMarket} 
         />
         <ParameterInput 
           id="current-covid-patients" 
           label="Currently Hospitalized COVID-19 Patients"
-          defaultValue="69" 
+          defaultValue={props.currentPatients} 
         />
       <Divider />
       <Typography variant="subtitle1">
@@ -66,15 +69,27 @@ const ParameterSidebar = (props) => {
       <ParameterInput 
         id="doubling-time" 
         label="Doubling time in days (up to today)"
-        defaultValue="4" 
+        defaultValue={props.doublingTime} 
       />
       <ParameterInput 
         id="social-distancing" 
         label="Social distancing (% reduction in social contact going forward"
-        defaultValue="30" 
+        defaultValue={props.socialDistancing} 
       />
+      <Button onClick={e => { props.resetParams(e) }}>Reset</Button>
     </Drawer> 
   )
 }
 
-export default ParameterSidebar;
+const mapStateToProps = state => {
+  return {
+    regionalPopulation: state.regionalPopulation,
+    hospitalMarket: state.hospitalMarket,
+    currentPatients: state.currentPatients,
+    doublingTime: state.doublingTime,
+    socialDistancing: state.socialDistancing
+  }
+}
+
+
+export default connect(mapStateToProps, { setRegionalPopulation, resetParams })(ParameterSidebar);
