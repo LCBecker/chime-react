@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button';
 import ParameterInput from './ParameterInput';
 import InfoIcon from '@material-ui/icons/Info';
-import { setRegionalPopulation, resetParams } from '../redux/actions';
+import { setRegionalPopulation, setHospitalMarket, setCurrentPatients, setDoublingTime, setSocialDistancing, resetParams } from '../redux/actions';
 
 const drawerWidth = 300;
 
@@ -52,12 +52,14 @@ const ParameterSidebar = (props) => {
         <ParameterInput 
           id="hospital-market" 
           label="Hospital Market Share (%)"
-          defaultValue={props.hospitalMarket} 
+          defaultValue={props.hospitalMarket}
+          onInputChange={ e => props.setHospitalMarket(e.target.value)} 
         />
         <ParameterInput 
           id="current-covid-patients" 
           label="Currently Hospitalized COVID-19 Patients"
-          defaultValue={props.currentPatients} 
+          defaultValue={props.currentPatients}
+          onInputChange={e => props.setCurrentPatients(e.target.value)} 
         />
       <Divider />
       <Typography variant="subtitle1">
@@ -69,14 +71,16 @@ const ParameterSidebar = (props) => {
       <ParameterInput 
         id="doubling-time" 
         label="Doubling time in days (up to today)"
-        defaultValue={props.doublingTime} 
+        defaultValue={props.doublingTime}
+        onInputChange={e => props.setDoublingTime(e.target.value)} 
       />
       <ParameterInput 
         id="social-distancing" 
         label="Social distancing (% reduction in social contact going forward"
-        defaultValue={props.socialDistancing} 
+        defaultValue={props.socialDistancing}
+        onInputChange={ e => props.setSocialDistancing(e.target.value) } 
       />
-      <Button onClick={e => { props.resetParams(e) }}>Reset</Button>
+      <Button onClick={e => props.resetParams(e) }>Reset</Button>
     </Drawer> 
   )
 }
@@ -92,4 +96,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, { setRegionalPopulation, resetParams })(ParameterSidebar);
+export default connect(mapStateToProps, { setRegionalPopulation, setHospitalMarket, setCurrentPatients, setDoublingTime, setSocialDistancing, resetParams })(ParameterSidebar);

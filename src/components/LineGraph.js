@@ -1,10 +1,10 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chart from "chart.js";
 let lineGraph;
-//import classes from "./LineGraph.module.css";
 
 const LineGraph = (props) => {
+  
     const graphRef = React.createRef();
     const intrinsicGrowthRate = props.doublingTime > 0.0 ? (2.0 ** (1.0 / props.doublingTime) - 1.0) : 0.0;
     const gamma = 1.0 / 14;
@@ -31,6 +31,8 @@ const LineGraph = (props) => {
     }
 
     const generateSirData = (initSusceptible, initInfected, initRecovered) => {
+      console.log("beta", beta);
+      console.log("initSusceptible", initSusceptible);
       let currentSusceptible = initSusceptible;
       let currentInfected = initInfected;
       let currentRecovered = initRecovered;
@@ -43,6 +45,7 @@ const LineGraph = (props) => {
         infectedData.push(currentInfected);
         recoveredData.push(currentRecovered);
         var nextDayData = sir(currentSusceptible, currentInfected, currentRecovered, n);
+        console.log(nextDayData);
         currentSusceptible = nextDayData[0];
         currentInfected = nextDayData[1];
         currentRecovered = nextDayData[2];
@@ -69,7 +72,7 @@ const LineGraph = (props) => {
         }
         const data = generateSirData(props.regionalPopulation, initInfected, 0.0);
         
-        new Chart(myGraphRef, {
+        lineGraph = new Chart(myGraphRef, {
             type: "line",
             data: {
                 xLabels: labels,
@@ -97,18 +100,18 @@ const LineGraph = (props) => {
             },
             options: {
                 //Customize chart options
-                scales: {
-                  xAxes: [{
-                    ticks: {
-                      beginAtZero: true
-                    }
-                  }],
-                  yAxes: [{
-                      ticks: {
-                          beginAtZero: true
-                      }
-                  }]
-                }
+                // scales: {
+                //   xAxes: [{
+                //     ticks: {
+                //       beginAtZero: true
+                //     }
+                //   }],
+                //   yAxes: [{
+                //       ticks: {
+                //           beginAtZero: true
+                //       }
+                //   }]
+                // }
             }
         });
     }
