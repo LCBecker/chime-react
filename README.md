@@ -4,7 +4,7 @@
 
 CHIME was developed by the Predictive Healthcare team at Penn Medicine to assist hospitals and public health officials with hospital capacity planning. The most up to date tool can be found [here](https://penn-chime.phl.io/).
 
-However, the current tool requires calling a backend server every time input parameters are changed to rerender the graphs. This is highly inefficent because calculating the predictions can be completed client-side. The goal of chime-react is to provide the tool as a simple, fast single page application without any need for multiple backend calls.
+The current tool requires calling a backend server every time input parameters are changed to rerender the graphs. This is highly inefficent because calculating the predictions can be completed client-side. The goal of chime-react is to provide the tool as a simple, fast single page application with all graph rerenderings being processed on the client-side.
 
 ## Upcoming Features / TODO
 
