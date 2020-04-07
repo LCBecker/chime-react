@@ -16,67 +16,62 @@ const initialState = {
   socialDistancing: 30
 }
 
-function regionalPopulation(state = initialState.regionalPopulation, action) {
-  switch (action.type) {
-    case REGIONAL_POP:
-      return action.value
-    default:
-      return state
+function regionalPopulation(state = initialState.regionalPopulation, {type, value}) {
+  if (type === REGIONAL_POP) {
+    return parseFloat(value);
   }
+  return state;
 }
 
-function hospitalMarket(state = initialState.hospitalMarket, action) {
-  switch (action.type) {
+function hospitalMarket(state = initialState.hospitalMarket, {type, value}) {
+  switch (type) {
     case HOSPITAL_MARKET:
-      return action.value
+      return parseFloat(value);
     default:
-      return state
+      return state;
   }
 }
 
-function currentPatients(state = initialState.currentPatients, action) {
-  switch (action.type) {
+function currentPatients(state = initialState.currentPatients, {type, value}) {
+  switch (type) {
     case CURRENT_PATIENTS:
-      return action.value
+      return parseFloat(value);
     default:
-      return state
+      return state;
   }
 }
 
-function doublingTime(state = initialState.doublingTime, action) {
-  switch (action.type) {
+function doublingTime(state = initialState.doublingTime, {type, value}) {
+  switch (type) {
     case DOUBLING_TIME:
-      return action.value
+      return parseFloat(value);
     default:
-      return state
+      return state;
   }
 }
 
-function socialDistancing(state = initialState.socialDistancing, action) {
-  switch (action.type) {
+function socialDistancing(state = initialState.socialDistancing, {type, value}) {
+  switch (type) {
     case SOCIAL_DISTANCING:
-      return action.value
+      return parseFloat(value);
     default:
-      return state
+      return state;
   }
 }
 
-function resetParams(state = initialState, action) {
-  switch (action.type) {
-    case RESET_PARAMS:
-      return Object.assign({}, initialState);
-    default:
-      return state
+function rootReducer(state, action) {
+  if (action.type === RESET_PARAMS) {
+    state = initialState;
   }
+  return allReducers(state, action);
 }
 
-const chimeApp = combineReducers({
+const allReducers = combineReducers({
   regionalPopulation,
   hospitalMarket,
   currentPatients,
   doublingTime,
-  socialDistancing,
-  resetParams
+  socialDistancing
 });
 
-export default chimeApp;
+export default rootReducer;

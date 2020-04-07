@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import Chart from "chart.js";
 let lineGraph;
 
-const LineGraph = (props) => {
-  
+const LineGraph = (props) => {  
     const graphRef = React.createRef();
     const intrinsicGrowthRate = props.doublingTime > 0.0 ? (2.0 ** (1.0 / props.doublingTime) - 1.0) : 0.0;
     const gamma = 1.0 / 14;
@@ -31,8 +30,6 @@ const LineGraph = (props) => {
     }
 
     const generateSirData = (initSusceptible, initInfected, initRecovered) => {
-      console.log("beta", beta);
-      console.log("initSusceptible", initSusceptible);
       let currentSusceptible = initSusceptible;
       let currentInfected = initInfected;
       let currentRecovered = initRecovered;
@@ -45,7 +42,6 @@ const LineGraph = (props) => {
         infectedData.push(currentInfected);
         recoveredData.push(currentRecovered);
         var nextDayData = sir(currentSusceptible, currentInfected, currentRecovered, n);
-        console.log(nextDayData);
         currentSusceptible = nextDayData[0];
         currentInfected = nextDayData[1];
         currentRecovered = nextDayData[2];
@@ -70,6 +66,7 @@ const LineGraph = (props) => {
         for (var i = 0; i < nDays +1; i++) {
           labels.push("Day " + i);
         }
+        
         const data = generateSirData(props.regionalPopulation, initInfected, 0.0);
         
         lineGraph = new Chart(myGraphRef, {

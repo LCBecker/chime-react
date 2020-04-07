@@ -46,20 +46,24 @@ const ParameterSidebar = (props) => {
         <ParameterInput 
           id="regional-population" 
           label="Regional Population"
-          defaultValue={props.regionalPopulation}
-          onInputChange={ e => props.setRegionalPopulation(e.target.value)} 
+          value={props.regionalPopulation}
+          minValue={1}
+          onInputChange={ props.setRegionalPopulation } 
         />
         <ParameterInput 
           id="hospital-market" 
           label="Hospital Market Share (%)"
-          defaultValue={props.hospitalMarket}
-          onInputChange={ e => props.setHospitalMarket(e.target.value)} 
+          value={props.hospitalMarket}
+          minValue={0.001}
+          maxValue={100.0}
+          onInputChange={ props.setHospitalMarket } 
         />
         <ParameterInput 
           id="current-covid-patients" 
           label="Currently Hospitalized COVID-19 Patients"
-          defaultValue={props.currentPatients}
-          onInputChange={e => props.setCurrentPatients(e.target.value)} 
+          value={props.currentPatients}
+          minValue={0}
+          onInputChange={ props.setCurrentPatients } 
         />
       <Divider />
       <Typography variant="subtitle1">
@@ -71,16 +75,19 @@ const ParameterSidebar = (props) => {
       <ParameterInput 
         id="doubling-time" 
         label="Doubling time in days (up to today)"
-        defaultValue={props.doublingTime}
-        onInputChange={e => props.setDoublingTime(e.target.value)} 
+        value={props.doublingTime}
+        minValue={0}
+        onInputChange={ props.setDoublingTime } 
       />
       <ParameterInput 
         id="social-distancing" 
         label="Social distancing (% reduction in social contact going forward"
-        defaultValue={props.socialDistancing}
-        onInputChange={ e => props.setSocialDistancing(e.target.value) } 
+        value={props.socialDistancing}
+        minValue={0}
+        maxValue={100}
+        onInputChange={ props.setSocialDistancing } 
       />
-      <Button onClick={e => props.resetParams(e) }>Reset</Button>
+      <Button onClick={() => props.resetParams() }>Reset</Button>
     </Drawer> 
   )
 }

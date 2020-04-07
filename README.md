@@ -8,10 +8,6 @@ However, the current tool requires calling a backend server every time input par
 
 ## Upcoming Features / TODO
 
-* Validate parameter inputs. Must be int or double, depending.
-* Add a RESET button to set all parameters back to their default values.
-* Add Redux to store S, I, R values.
-* Rewrite Python formulas for S, I, R and provide them as data to line graph.
 * Add stories (Storybook).
 * Add PropTypes for custom components.
 * Add JEST tests.
