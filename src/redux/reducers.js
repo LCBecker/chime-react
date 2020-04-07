@@ -5,6 +5,7 @@ import {
   CURRENT_PATIENTS,
   DOUBLING_TIME,
   SOCIAL_DISTANCING,
+  INFECTED,
   RESET_PARAMS
 } from './actions'
 
@@ -13,7 +14,8 @@ const initialState = {
   hospitalMarket: 15,
   currentPatients: 69,
   doublingTime: 4,
-  socialDistancing: 30
+  socialDistancing: 30,
+  infected: 18400
 }
 
 function regionalPopulation(state = initialState.regionalPopulation, {type, value}) {
@@ -59,6 +61,13 @@ function socialDistancing(state = initialState.socialDistancing, {type, value}) 
   }
 }
 
+function infected(state = initialState.infected, {type, value}) {
+  if (type === INFECTED) {
+    return Math.ceil(value);
+  }
+  return state;
+}
+
 function rootReducer(state, action) {
   if (action.type === RESET_PARAMS) {
     state = initialState;
@@ -71,7 +80,8 @@ const allReducers = combineReducers({
   hospitalMarket,
   currentPatients,
   doublingTime,
-  socialDistancing
+  socialDistancing,
+  infected
 });
 
 export default rootReducer;

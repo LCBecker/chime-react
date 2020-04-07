@@ -1,15 +1,21 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chart from "chart.js";
+import { setInfected } from "../redux/actions";
 let lineGraph;
 
-const LineGraph = (props) => {  
+const LineGraph = (props) => {
+    const {setInfected} = props;  
     const graphRef = React.createRef();
     const intrinsicGrowthRate = props.doublingTime > 0.0 ? (2.0 ** (1.0 / props.doublingTime) - 1.0) : 0.0;
     const gamma = 1.0 / 14;
     const beta = (intrinsicGrowthRate + gamma) / props.regionalPopulation * (1.0 - (props.socialDistancing / 100));
     const initInfected = props.currentPatients / (props.hospitalMarket * 0.01) / 0.025;
     const nDays = 100;
+
+    useEffect(() => {
+      setInfected(initInfected);
+    },[setInfected, initInfected])
 
     const sir = (s, i, r, n) => {
       let s_n = ((beta * -1) * s * i) + s;
@@ -133,4 +139,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(LineGraph);
+export default connect(mapStateToProps, { setInfected })(LineGraph);

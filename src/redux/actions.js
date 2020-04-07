@@ -7,7 +7,9 @@ export const HOSPITAL_MARKET = 'HOSPITAL_MARKET'
 export const CURRENT_PATIENTS = 'CURR_PATIENTS'
 export const DOUBLING_TIME = 'DOUBLING_TIME'
 export const SOCIAL_DISTANCING = 'SOCIAL_DISTANCING'
+export const INFECTED = 'INFECTED'
 export const RESET_PARAMS = 'RESET_PARAMS'
+
 
 /*
  * action creators
@@ -31,6 +33,10 @@ export function setDoublingTime(value) {
 
 export function setSocialDistancing(value) {
   return { type: SOCIAL_DISTANCING, value }
+}
+
+export function setInfected(value) {
+  return { type: INFECTED, value}
 }
 
 export function resetParams(value) {
