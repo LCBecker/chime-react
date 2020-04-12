@@ -1,5 +1,7 @@
 # chime-react
 
+![chime-react](https://user-images.githubusercontent.com/6509140/79072971-e4543180-7cb1-11ea-97cc-57f5b4b5f033.gif)
+
 ## Motivation
 
 CHIME was developed by the Predictive Healthcare team at Penn Medicine to assist hospitals and public health officials with hospital capacity planning. The most up to date tool can be found [here](https://penn-chime.phl.io/).
